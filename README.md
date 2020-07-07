@@ -8,7 +8,9 @@ Get the saved password from Chrome on MacOS
 ```bash
 Usage of ./hackChrome:
   -k string
-    	网址关键字
+    	keywords for website url
   -p string
-    	Google Chrome个人资料路径, 输入chrome://version 可以查看
+    	profile path for  Google Chrome, you can check with chrome://version  (default "/Users/XXX/Library/ApplicationSupport/Google/Chrome/Default")
 ```
+
+![pic](https://g.asyncoder.com/images/20200707125247-1ESFHy.png)

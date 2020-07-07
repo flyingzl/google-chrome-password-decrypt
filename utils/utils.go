@@ -23,7 +23,7 @@ func BuildTempFile(source string) (*os.File, error) {
 	return file, nil
 }
 
-// FormatOutput used to ouput result
+// FormatOutput used to pretty query result
 func FormatOutput(results []model.LoginInfo) {
 	table := simpletable.New()
 	table.Header = &simpletable.Header{
@@ -59,4 +59,13 @@ func FileExists(filename string) bool {
 		return false
 	}
 	return !info.IsDir()
+}
+
+// RemoveFile used to remove a  file
+func RemoveFile(file *os.File) bool {
+	err := os.Remove(file.Name())
+	if err != nil {
+		return false
+	}
+	return true
 }

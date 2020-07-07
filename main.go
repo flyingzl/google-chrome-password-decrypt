@@ -14,8 +14,13 @@ var keyword string
 var profile string
 
 func init() {
-	flag.StringVar(&keyword, "k", "", "网址关键字")
-	flag.StringVar(&profile, "p", "", "Google Chrome个人资料路径, 输入chrome://version 可以查看")
+	flag.StringVar(&keyword, "k", "", "keywords for website url")
+	flag.StringVar(&profile, "p", getUserDefaultProfile(), "profile path for  Google Chrome, you can check with chrome://version ")
+}
+
+func getUserDefaultProfile() string {
+	user, _ := user.Current()
+	return fmt.Sprintf("%s/Library/ApplicationSupport/Google/Chrome/Default", user.HomeDir)
 }
 
 func checkError(err error) bool {
@@ -30,16 +35,12 @@ func main() {
 
 	flag.Parse()
 
-	user, err := user.Current()
-
-	if checkError(err) {
-		return
-	}
-
-	dbFile := fmt.Sprintf("%s/Library/ApplicationSupport/Google/Chrome/Default/Login Data", user.HomeDir)
+	dbFile := ""
 
 	if profile != "" {
-		dbFile = profile + "/Login Data"
+		dbFile = fmt.Sprintf("%s/Login Data", profile)
+	} else {
+		dbFile = fmt.Sprintf("%s/Login Data", getUserDefaultProfile())
 	}
 
 	if !utils.FileExists(dbFile) {
@@ -47,6 +48,7 @@ func main() {
 		return
 	}
 
+	// When google chrome is running, we can't read sqlite file, so we make a copy of it
 	file, err := utils.BuildTempFile(dbFile)
 
 	if err != nil {
@@ -54,6 +56,7 @@ func main() {
 		return
 	}
 
+	// get key from MacOX keychain
 	key, err := utils.GetDerivedKey()
 
 	if checkError(err) {
@@ -66,10 +69,11 @@ func main() {
 	}
 
 	result, err := core.QueryPasswordInfo(file.Name(), &queryModel)
+
 	if checkError(err) {
 		return
 	}
 
+	utils.RemoveFile(file)
 	utils.FormatOutput(result)
-
 }
