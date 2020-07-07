@@ -7,6 +7,8 @@ import (
 	"github.com/havoc-io/go-keytar"
 	"golang.org/x/crypto/pbkdf2"
 	"io/ioutil"
+	"os"
+	"os/user"
 )
 
 var (
@@ -20,7 +22,13 @@ var (
 
 // GetDerivedKey 获取密钥串
 func GetDerivedKey() ([]byte, error) {
-	input, err := ioutil.ReadFile(".key")
+	user, _ := user.Current()
+	keyDir := user.HomeDir + "/.hackChrome/"
+	if !FileExists(keyDir) {
+		os.Mkdir(keyDir, os.ModePerm)
+	}
+	keyPath := keyDir + "key"
+	input, err := ioutil.ReadFile(keyPath)
 	if err != nil {
 		keychain, err := keytar.GetKeychain()
 		if err != nil {
@@ -31,7 +39,7 @@ func GetDerivedKey() ([]byte, error) {
 			return nil, err
 		}
 		// save chromePassword in keyfile
-		ioutil.WriteFile(".key", []byte(chromePassword), 0644)
+		ioutil.WriteFile(keyPath, []byte(chromePassword), 0644)
 		dk := pbkdf2.Key([]byte(chromePassword), []byte(SALT), ITERATIONS, KEYLENGTH, sha1.New)
 		return dk, nil
 	}
