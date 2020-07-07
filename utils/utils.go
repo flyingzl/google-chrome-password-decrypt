@@ -3,8 +3,10 @@ package utils
 import (
 	"HackChrome/model"
 	"fmt"
+	"github.com/alexeyco/simpletable"
 	"io/ioutil"
 	"os"
+	"strconv"
 )
 
 // BuildTempFile used copy a file to tempdir and return the temp file
@@ -23,12 +25,31 @@ func BuildTempFile(source string) (*os.File, error) {
 
 // FormatOutput used to ouput result
 func FormatOutput(results []model.LoginInfo) {
-	for _, v := range results {
-		fmt.Printf("====================\n")
-		fmt.Printf("Url: %s\nUsername: %s\nPassword:%s\n\n", v.URL, v.UserName, v.Password)
+	table := simpletable.New()
+	table.Header = &simpletable.Header{
+		Cells: []*simpletable.Cell{
+			{Align: simpletable.AlignCenter, Text: "URL"},
+			{Align: simpletable.AlignCenter, Text: "User Name"},
+			{Align: simpletable.AlignCenter, Text: "Password"},
+		},
+	}
+	for _, row := range results {
+		r := []*simpletable.Cell{
+			{Text: row.URL},
+			{Text: row.UserName},
+			{Text: row.Password},
+		}
+		table.Body.Cells = append(table.Body.Cells, r)
 	}
 
-	fmt.Printf("\nTotal Auth: %d\n", len(results))
+	table.Footer = &simpletable.Footer{
+		Cells: []*simpletable.Cell{
+			{Align: simpletable.AlignRight, Span: 3, Text: "Total Records: " + strconv.Itoa(len(results))},
+		},
+	}
+	table.SetStyle(simpletable.StyleUnicode)
+	fmt.Println(table.String())
+
 }
 
 // FileExists used to check whether file exists or not

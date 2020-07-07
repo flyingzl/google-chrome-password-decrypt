@@ -1,9 +1,13 @@
+github.com/alexeyco/simpletable v0.0.0-20200203113705-55bd62a5b8df h1:i5EJgJMgwrt5u4Ma7OAuY/k+SbnUvj4T7vX/cXVNmVg=
+github.com/alexeyco/simpletable v0.0.0-20200203113705-55bd62a5b8df/go.mod h1:gx4+gp4N5VWqThMIidoUMBNUCT4Pan3J8ETR1ParWUU=
 github.com/danieljoos/wincred v1.0.2 h1:zf4bhty2iLuwgjgpraD2E9UbvO+fe54XXGJbOwe23fU=
 github.com/danieljoos/wincred v1.0.2/go.mod h1:SnuYRW9lp1oJrZX/dXJqr0cPK5gYXqx3EJbmjhLdK9U=
 github.com/davecgh/go-spew v1.1.0 h1:ZDRjVQ15GmhC3fiQ8ni8+OwkZQO4DARzQgrnXU1Liz8=
 github.com/davecgh/go-spew v1.1.0/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
 github.com/havoc-io/go-keytar v0.0.0-20190805193312-c9afc30c49ac h1:eaeUF94PxN+op5u4b8qSUEHMORA8Dho4vHaU4MRD7Sg=
 github.com/havoc-io/go-keytar v0.0.0-20190805193312-c9afc30c49ac/go.mod h1:WUcW8txQ1HQfzCSD8PwGkPAHcz6rl/lX5nRRC+9utUo=
+github.com/mattn/go-runewidth v0.0.9 h1:Lm995f3rfxdpd6TSmuVCHVb/QhupuXlYr8sCI/QdE+0=
+github.com/mattn/go-runewidth v0.0.9/go.mod h1:H031xJmbD/WCDINGzjvQ9THkh0rPKHF+m2gUSrubnMI=
 github.com/mattn/go-sqlite3 v2.0.3+incompatible h1:gXHsfypPkaMZrKbD5209QV9jbUTJKjyR5WD3HYQSd+U=
 github.com/mattn/go-sqlite3 v2.0.3+incompatible/go.mod h1:FPy6KqzDD04eiIsT53CuJW3U88zkxoIYsOqkbpncsNc=
 github.com/pmezard/go-difflib v1.0.0 h1:4DBwDE0NGyQoBHbLQYPwSUPoCMWR5BEzIk/f1lZbAQM=
